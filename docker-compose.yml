@@ -49,6 +49,7 @@ services:
         image: ${FLUENTD_IMAGE}
         ports:
             - 24224:24224
+            - 9880:9880
             # - 127.0.0.1:24224:24224
 #            - 24224:24224/udp
         volumes:
@@ -79,14 +80,14 @@ services:
             - net
         depends_on:
             - kibana
-        logging:
-            driver: fluentd
-            options:
-                fluentd-address: localhost:24224
-                fluentd-async-connect: 'true'
-                fluentd-retry-wait: '1s'
-                fluentd-max-retries: '30'
-                tag: ${LOG_OPT_TAG_PREFIX}.efk.nginx
+        # logging:
+        #     driver: fluentd
+        #     options:
+        #         fluentd-address: localhost:24224
+        #         fluentd-async-connect: 'true'
+        #         fluentd-retry-wait: '1s'
+        #         fluentd-max-retries: '30'
+        #         tag: ${LOG_OPT_TAG_PREFIX}.efk.nginx
 networks:
     net:
         driver: bridge
